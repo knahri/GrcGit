@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div>
+  <h3>Livraison - Projet GRC</h3>
+</div>
+<div style="margin: 20px; border: 1.5px solid  rgb(0, 0, 0) ; box-shadow: 5px 5px 5px grey;" >
+  <div style="padding: 35px; ">
+
+    <h4>GRC_Dossier-Livraison</h4>
+    <label>Version_Livraison :</label><br>
+    <input type="text" [(ngModel)]="livraison" name="livraison" placeholder="0.0.0.0" required >
+    <!--  <p>{{Livraison}}</p>  -->
+    <br>
+    <label>Date :</label><br>
+    <input type="date" [(ngModel)]="date" name="date" placeholder="jj/mm/aaaa" required>
+    <br>
+    <h5>La livraison contient les fichiers suivants :</h5>
+    <input type="checkbox" [(ngModel)]="cboxBiz" (ngModelChange)="onChangeCboxBiz()">
+    <label>Business</label>
+    <br>
+    <input type="checkbox" [(ngModel)]="cboxSrv" (ngModelChange)="onChangeCboxSrv()">
+    <label>Service</label>
+    <br>
+    <br>
+    <input type="checkbox" [(ngModel)]="cboxFx" (ngModelChange)="onChangeCboxFx()"  >
+    <label>LIVR_Fx</label>
+    <br>
+    <input type="checkbox" [(ngModel)]="cboxMb" (ngModelChange)="onChangeCboxMb()">
+    <label>LIVR_Mb</label>
+    <br>
+    <br>
+    <input type="checkbox" [(ngModel)]="cboxGrcFx" (ngModelChange)="onChangeCboxGrcFx()">
+    <label>GRC_DBA_Fx</label>
+    <br>
+    <input type="checkbox" [(ngModel)]="cboxGrcMb" (ngModelChange)="onChangeCboxGrcMb()">
+    <label>GRC_DBA_Mb</label>
+    <br>
+    <br>
+    <div>
+      <form [formGroup]="myForm" *ngIf="true">
+        <div formArrayName="evol2">
+          <p> Evolutions </p>
+          <div *ngFor="let constdi of diForms.controls; let i=index" [formGroupName]="i">
+            <input type="text" formControlName="id" [(ngModel)]="inputVal1" placeholder="Identifiant" #ngidv>
+            <input type="text" formControlName="evol" [(ngModel)]="inputVal2" placeholder="Evolutions" #ngevolv>
+            <button class="btnTrash" (click)="supprimer(i)"><i class="fa fa-trash"></i></button>
+          </div>
+        </div>
+        <button class="btn" (click)="ajouter()"><i class="fa fa-plus"></i></button>
+      </form>
+      <div>
+        <div>
+          <p> Evolutions </p>
+          <div *ngFor="let input of inputs">
+            <input type="text" [(ngModel)]="input.inputVal1" placeholder="Identifiant" >
+            <input type="text" [(ngModel)]="input.inputVal2" placeholder="Evolutions" >
+          </div>
+        </div>
+        <button class="btn" (click)="ajouterT()"><i class="fa fa-plus"></i></button>
+      </div>
+      <button (click)="getInputsVal()"></button>
+    </div>
+
+  </div>
+  <input type="button" id="GenarateBtn" (click)="call()" value="Generate">
+</div>
+<br>
+<router-outlet></router-outlet>
